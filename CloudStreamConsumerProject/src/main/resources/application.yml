@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    stream:
+      default:
+         consumer:  
+          useNativeEncoding: true     
+      bindings:
+        messageConsumer-in-0:
+          destination: test-topic
+          content-type: application/*+avro
+      kafka:
+          binder:        
+            consumer-properties:
+              key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+              value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+              schema.registry.url: http://localhost:8081
+              specific.avro.reader: true
+
+  application:
+    name: CloudStreamConsumerProject	
+server:
+  port: 8096	  
